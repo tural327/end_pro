@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="static/table_style.css">
+</head>
+<body>
+  <h1>My Virtual Simulation</h1>
+
+  <!-- Section 1: Charts -->
+  <section class="charts-section">
+    <h2>Charts</h2>
+    <div class="button-container">
+      <button onclick="showChart('all')">Show All</button>
+      <button onclick="showChart('temp_chart')">Temperature</button>
+      <button onclick="showChart('hum_chart')">Vibration</button>
+      <button onclick="showChart('powcun_chart')">Power Consumption</button>
+      <button onclick="showChart('pressure_chart')">Pressure</button>
+      <button onclick="showChart('material_flow_chart')">Material Flow</button>
+      <button onclick="showChart('cycle_time_chart')">Cycle Time</button>
+      <button onclick="showChart('error_rate_chart')">Error Rate</button>
+      <button onclick="showChart('downtime_chart')">Downtime</button>
+      <button onclick="showChart('maintenance_flag_chart')">Maintenance Flag</button>
+      <button onclick="showChart('efficiency_score_chart')">Efficiency Score</button>
+      <button onclick="showChart('production_status_chart')">Production Status</button>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart"><h3>Temperature</h3><div id="temp_chart"></div></div>
+      <div class="chart"><h3>Vibration</h3><div id="hum_chart"></div></div>
+      <div class="chart"><h3>Power Consumption</h3><div id="powcun_chart"></div></div>
+      <div class="chart"><h3>Pressure</h3><div id="pressure_chart"></div></div>
+      <div class="chart"><h3>Material Flow Rate</h3><div id="material_flow_chart"></div></div>
+      <div class="chart"><h3>Cycle Time</h3><div id="cycle_time_chart"></div></div>
+      <div class="chart"><h3>Error Rate</h3><div id="error_rate_chart"></div></div>
+      <div class="chart"><h3>Downtime</h3><div id="downtime_chart"></div></div>
+      <div class="chart"><h3>Maintenance Flag</h3><div id="maintenance_flag_chart"></div></div>
+      <div class="chart"><h3>Efficiency Score</h3><div id="efficiency_score_chart"></div></div>
+      <div class="chart"><h3>Production Status</h3><div id="production_status_chart"></div></div>
+    </div>
+  </section>
+
+  <!-- Section 2: Table -->
+  <section class="table-section">
+    <h2>Simulation Data Table</h2>
+    <table>
+      <tbody>
+        <!-- 7 rows, 12 cols -->
+        {% for i in range(7) %}
+        <tr>
+          {% for j in range(12) %}
+          <td>R{{ i+1 }}C{{ j+1 }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 3: Virtual Model -->
+  <section class="model-section">
+    <h2>My Virtual Model</h2>
+    <div class="model-box">
+      <p>3D/Interactive model area (future placeholder)</p>
+    </div>
+  </section>
+
+  <script src="static/table_js.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(to right, #2c3e50, #3498db);
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+    }
+    .chart-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .chart {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+    }
+    h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Salam, {{ username }}!</h1>
+  <p>Kobi team proses üzrə iş gedir....!</p>
+
+  <div class="chart-container">
+    <div class="chart">
+      <h3>Temperature</h3>
+      <div id="temp_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Vibration</h3>
+      <div id="hum_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Power Consumption</h3>
+      <div id="powcun_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Pressure</h3>
+      <div id="pressure_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Material Flow Rate</h3>
+      <div id="material_flow_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Cycle Time</h3>
+      <div id="cycle_time_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Error Rate</h3>
+      <div id="error_rate_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Downtime</h3>
+      <div id="downtime_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Maintenance Flag</h3>
+      <div id="maintenance_flag_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Efficiency Score</h3>
+      <div id="efficiency_score_chart"></div>
+    </div>
+
+    <div class="chart">
+      <h3>Production Status</h3>
+      <div id="production_status_chart"></div>
+    </div>
+  </div>
+
+<script>
+function updateCharts() {
+    $.getJSON("/data", function(data) {
+        let timestamps = data.map(d => new Date(d[0]));
+        let temps = data.map(d => d[1]);
+        let vib = data.map(d => d[2]);
+        let power = data.map(d => d[3]);
+        let pressure = data.map(d => d[4]);
+        let materialFlow = data.map(d => d[5]);
+        let cycleTime = data.map(d => d[6]);
+        let errorRate = data.map(d => d[7]);
+        let downtime = data.map(d => d[8]);
+        let maintenanceFlag = data.map(d => d[9]);
+        let efficiencyScore = data.map(d => d[10]);
+        let productionStatus = data.map(d => d[11]);
+
+        // Helper to draw chart
+        function drawChart(id, yData, color) {
+            Plotly.newPlot(id, [{
+                x: timestamps,
+                y: yData,
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: {color: color}
+            }], {margin: { t: 20 }});
+        }
+
+        drawChart('temp_chart', temps, '#ff7f0e');
+        drawChart('hum_chart', vib, '#1f77b4');
+        drawChart('powcun_chart', power, '#2ca02c');
+        drawChart('pressure_chart', pressure, '#d62728');
+        drawChart('material_flow_chart', materialFlow, '#9467bd');
+        drawChart('cycle_time_chart', cycleTime, '#8c564b');
+        drawChart('error_rate_chart', errorRate, '#e377c2');
+        drawChart('downtime_chart', downtime, '#7f7f7f');
+        drawChart('maintenance_flag_chart', maintenanceFlag, '#bcbd22');
+        drawChart('efficiency_score_chart', efficiencyScore, '#17becf');
+        drawChart('production_status_chart', productionStatus, '#ff9896');
+    });
+}
+
+// Initial chart render
+updateCharts();
+
+// Update every 5 seconds
+setInterval(updateCharts, 5000);
+</script>
+
+</body>
+</html>
