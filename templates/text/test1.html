@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="static/table_style.css">
+</head>
+<body>
+<h1>The last update</h1>
+
+    <section class="top-boxes">
+  <div class="data-box">
+      <h3>Temperature</h3>
+      <p id="box_temperature">--</p>
+  </div>
+
+  <div class="data-box">
+      <h3>Humidity</h3>
+      <p id="box_humidity">--</p>
+  </div>
+
+  <div class="data-box">
+      <h3>Vibration</h3>
+      <p id="box_vibration">--</p>
+  </div>
+
+  <div class="data-box">
+      <h3>Flow</h3>
+      <p id="box_flow">--</p>
+  </div>
+
+  <div class="data-box">
+      <h3>Voltage</h3>
+      <p id="box_voltage">--</p>
+  </div>
+</section>
+
+  <h1>My Virtual Simulation</h1>
+
+  <!-- Section 1: Charts -->
+  <section class="charts-section">
+    <h2>Charts</h2>
+    <div class="button-container">
+      <button onclick="showChart('all')">Show All</button>
+      <button onclick="showChart('temp_chart')">Temperature</button>
+      <button onclick="showChart('hum_chart')">Vibration</button>
+      <button onclick="showChart('powcun_chart')">Power Consumption</button>
+      <button onclick="showChart('pressure_chart')">Pressure</button>
+      <button onclick="showChart('material_flow_chart')">Material Flow</button>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart"><h3>Temperature</h3><div id="temp_chart"></div></div>
+      <div class="chart"><h3>Vibration</h3><div id="hum_chart"></div></div>
+      <div class="chart"><h3>Power Consumption</h3><div id="powcun_chart"></div></div>
+      <div class="chart"><h3>Pressure</h3><div id="pressure_chart"></div></div>
+      <div class="chart"><h3>Material Flow Rate</h3><div id="material_flow_chart"></div></div>
+    </div>
+  </section>
+
+  <!-- Section 2: Table -->
+<section class="table-section">
+
+  <div class="table-container">
+
+     <table>
+  <tr>
+    <th>Data source</th>
+    <th>Temperature</th>
+    <th>Humidity</th>
+    <th>Vibration</th>
+    <th>Flow</th>
+    <th>Voltage</th>
+  </tr>
+  <tr>
+    <td>Min</td>
+    <td><span id="temp_min">--</span></td>
+    <td><span id="hum_min">--</span></td>
+    <td><span id="vib_min">--</span></td>
+    <td><span id="flow_min">--</span></td>
+    <td><span id="volt_min">--</span></td>
+  </tr>
+  <tr>
+    <td>Max</td>
+    <td><span id="temp_max">--</span></td>
+    <td><span id="hum_max">--</span></td>
+    <td><span id="vib_max">--</span></td>
+    <td><span id="flow_max">--</span></td>
+    <td><span id="volt_max">--</span></td>
+
+  </tr>
+  <tr>
+    <td>Mean</td>
+    <td><span id="temp_mean">--</span></td>
+    <td><span id="hum_mean">--</span></td>
+    <td><span id="vib_mean">--</span></td>
+    <td><span id="flow_mean">--</span></td>
+    <td><span id="volt_mean">--</span></td>
+  </tr>
+  <tr>
+    <td>Running Avg </td>
+    <td><span id="temp_run">--</span></td>
+    <td><span id="hum_run">--</span></td>
+    <td><span id="vib_run">--</span></td>
+    <td><span id="flow_run">--</span></td>
+    <td><span id="volt_run">--</span></td>
+  </tr>
+</table> 
+
+
+  <script src="static/table_js.js"></script>
+</body>
+</html>
