@@ -1,0 +1,106 @@
+/* Page */
+body {
+  background: black;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+/* Buttons */
+.chart-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 20px;
+  justify-content: center;
+}
+
+.chart-buttons button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.chart-buttons button:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+}
+
+.chart-buttons button.active {
+  background: #1abc9c;
+}
+
+/* Charts: stacked vertically */
+.chart-container {
+  display: flex;
+  flex-direction: column;  /* line by line */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.chart {
+  background: white;        /* white chart card */
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  color: black;
+}
+
+.chart h3 {
+  margin: 0 0 10px;
+  text-align: center;
+  color: black;
+}
+
+/* Table (white) */
+.table-container {
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;     /* white table */
+  border-radius: 10px;
+  overflow: hidden;
+  color: black;
+}
+
+thead {
+  background: #f2f2f2;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Utilities */
+.hidden {
+  display: none !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .chart-buttons button {
+    flex: 1 0 calc(50% - 10px); /* two per row on mobile */
+  }
+  table, th, td {
+    font-size: 12px;
+  }
+}
