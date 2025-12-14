@@ -162,6 +162,6 @@ def health():
     return json.dumps({"status": "healthy"}), 200
 
 # -------------------------------
-# Local run
+# Local run pandas removed
 # -------------------------------
 
