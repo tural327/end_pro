@@ -323,10 +323,10 @@ def data_sistem3():
         if conn_local:
             conn_local.close()
 
-# Health check endpoint for Elastic Beanstalk
-#@application.route('/health')
-#def health():
-#    return json.dumps({"status": "healthy"}), 200
+ Health check endpoint for Elastic Beanstalk
+@application.route('/health')
+def health():
+    return json.dumps({"status": "healthy"}), 200
 
 
 #if __name__ == '__main__':
