@@ -85,7 +85,7 @@ def login():
             return render_template('sistem2.html', username=user, sensor_data=data_table)
 
         # -------- SISTEM 3 --------
-        elif user == 'sistem3' and pw == 'kobia3':
+        elif user == 'milla_main' and pw == 'test3':
             sql = """
                 SELECT created_at, p1, p2, p3, p4, p5
                 FROM sistem3
