@@ -9,7 +9,6 @@ username = "admin"
 password = "Yerik2ral1995"
 database_name = "test1"
 
-# IMPORTANT: Elastic Beanstalk üçün application
 application = Flask(__name__)
 
 # -------------------------------
@@ -57,9 +56,13 @@ def login():
         # -------- ADMIN --------
         if user == 'admin' and pw == 'admin12345':
             sql = """
-                SELECT created_at, temperature, humidity, vibiration, flow, voltage
-                FROM sensors
-                ORDER BY created_at DESC
+                SELECT * FROM (
+                    SELECT created_at, temperature, humidity, vibiration, flow, voltage
+                    FROM sensors
+                    ORDER BY created_at DESC
+                    LIMIT 5000
+                ) AS sub
+                ORDER BY created_at ASC
             """
             data_table = fetch_all(sql)
             return render_template('test1.html', username=user, sensor_data=data_table)
@@ -67,9 +70,13 @@ def login():
         # -------- SISTEM 1 --------
         elif user == 'sistem1' and pw == 'kobia1':
             sql = """
-                SELECT created_at, p1, p2, p3, p4, p5
-                FROM sistem1
-                ORDER BY created_at DESC
+                SELECT * FROM (
+                    SELECT created_at, p1, p2, p3, p4, p5
+                    FROM sistem1
+                    ORDER BY created_at DESC
+                    LIMIT 5000
+                ) AS sub
+                ORDER BY created_at ASC
             """
             data_table = fetch_all(sql)
             return render_template('sistem1.html', username=user, sensor_data=data_table)
@@ -77,9 +84,13 @@ def login():
         # -------- SISTEM 2 --------
         elif user == 'sistem2' and pw == 'kobia2':
             sql = """
-                SELECT created_at, p1, p2, p3, p4, p5
-                FROM sistem2
-                ORDER BY created_at DESC
+                SELECT * FROM (
+                    SELECT created_at, p1, p2, p3, p4, p5
+                    FROM sistem2
+                    ORDER BY created_at DESC
+                    LIMIT 5000
+                ) AS sub
+                ORDER BY created_at ASC
             """
             data_table = fetch_all(sql)
             return render_template('sistem2.html', username=user, sensor_data=data_table)
@@ -87,9 +98,13 @@ def login():
         # -------- SISTEM 3 --------
         elif user == 'milla_main' and pw == 'test3':
             sql = """
-                SELECT created_at, p1, p2, p3, p4, p5
-                FROM sistem3
-                ORDER BY created_at DESC
+                SELECT * FROM (
+                    SELECT created_at, p1, p2, p3, p4, p5
+                    FROM sistem3
+                    ORDER BY created_at DESC
+                    LIMIT 5000
+                ) AS sub
+                ORDER BY created_at ASC
             """
             data_table = fetch_all(sql)
             return render_template('sistem3.html', username=user, sensor_data=data_table)
@@ -105,17 +120,17 @@ def login():
 @application.route('/data')
 def data():
     sql = """
-        SELECT created_at, temperature, humidity, vibiration, flow, voltage
-        FROM sensors
+        SELECT * FROM (
+            SELECT created_at, temperature, humidity, vibiration, flow, voltage
+            FROM sensors
+            ORDER BY created_at DESC
+            LIMIT 5000
+        ) AS sub
         ORDER BY created_at ASC
     """
     rows = fetch_all(sql)
 
-    data = []
-    for r in rows:
-        data.append([
-            str(r[0]), r[1], r[2], r[3], r[4], r[5]
-        ])
+    data = [[str(r[0]), r[1], r[2], r[3], r[4], r[5]] for r in rows]
 
     response = make_response(json.dumps(data))
     response.content_type = 'application/json'
@@ -123,9 +138,16 @@ def data():
 
 @application.route('/data_sistem1')
 def data_sistem1():
-    sql = "SELECT created_at, p1, p2, p3, p4, p5 FROM sistem1 ORDER BY created_at ASC"
+    sql = """
+        SELECT * FROM (
+            SELECT created_at, p1, p2, p3, p4, p5
+            FROM sistem1
+            ORDER BY created_at DESC
+            LIMIT 5000
+        ) AS sub
+        ORDER BY created_at ASC
+    """
     rows = fetch_all(sql)
-
     data = [[str(r[0]), r[1], r[2], r[3], r[4], r[5]] for r in rows]
 
     response = make_response(json.dumps(data))
@@ -134,9 +156,16 @@ def data_sistem1():
 
 @application.route('/data_sistem2')
 def data_sistem2():
-    sql = "SELECT created_at, p1, p2, p3, p4, p5 FROM sistem2 ORDER BY created_at ASC"
+    sql = """
+        SELECT * FROM (
+            SELECT created_at, p1, p2, p3, p4, p5
+            FROM sistem2
+            ORDER BY created_at DESC
+            LIMIT 5000
+        ) AS sub
+        ORDER BY created_at ASC
+    """
     rows = fetch_all(sql)
-
     data = [[str(r[0]), r[1], r[2], r[3], r[4], r[5]] for r in rows]
 
     response = make_response(json.dumps(data))
@@ -145,9 +174,16 @@ def data_sistem2():
 
 @application.route('/data_sistem3')
 def data_sistem3():
-    sql = "SELECT created_at, p1, p2, p3, p4, p5 FROM sistem3 ORDER BY created_at ASC"
+    sql = """
+        SELECT * FROM (
+            SELECT created_at, p1, p2, p3, p4, p5
+            FROM sistem3
+            ORDER BY created_at DESC
+            LIMIT 5000
+        ) AS sub
+        ORDER BY created_at ASC
+    """
     rows = fetch_all(sql)
-
     data = [[str(r[0]), r[1], r[2], r[3], r[4], r[5]] for r in rows]
 
     response = make_response(json.dumps(data))
@@ -160,8 +196,3 @@ def data_sistem3():
 @application.route('/health')
 def health():
     return json.dumps({"status": "healthy"}), 200
-
-# -------------------------------
-# Local run pandas removed
-# -------------------------------
-
